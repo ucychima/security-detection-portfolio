@@ -1,0 +1,30 @@
+2026-02-10 08:01:12 EventID=4624 LogonType=2 User=jsmith Workstation=WIN10-01 IP=10.0.0.15 Status=Success
+2026-02-10 08:05:44 EventID=4625 LogonType=3 User=admin Workstation=WIN10-02 IP=192.168.1.50 Status=Failure
+2026-02-10 08:06:01 EventID=4625 LogonType=3 User=admin Workstation=WIN10-02 IP=192.168.1.50 Status=Failure
+2026-02-10 08:06:10 EventID=4625 LogonType=3 User=admin Workstation=WIN10-02 IP=192.168.1.50 Status=Failure
+2026-02-10 08:07:21 EventID=4624 LogonType=10 User=administrator Workstation=DC01 IP=10.0.0.5 Status=Success
+2026-02-10 08:10:11 EventID=4672 User=administrator Privileges=SeDebugPrivilege
+2026-02-10 08:12:45 EventID=4720 TargetUser=newuser Creator=administrator
+2026-02-10 08:13:10 EventID=4726 TargetUser=tempuser DeletedBy=administrator
+2026-02-10 08:15:33 EventID=4624 LogonType=3 User=svc_backup Workstation=SERVER01 IP=10.0.0.20 Status=Success
+2026-02-10 08:16:44 EventID=4624 LogonType=3 User=svc_backup Workstation=SERVER02 IP=10.0.0.20 Status=Success
+2026-02-10 08:17:50 EventID=4624 LogonType=3 User=svc_backup Workstation=DC01 IP=10.0.0.20 Status=Success
+2026-02-10 08:18:11 EventID=7045 ServiceName=malicioussvc BinaryPath=C:\Temp\payload.exe InstalledBy=administrator
+2026-02-10 08:20:15 EventID=4625 LogonType=3 User=guest Workstation=WIN10-03 IP=203.0.113.10 Status=Failure
+2026-02-10 08:21:44 EventID=4624 LogonType=2 User=finance1 Workstation=WIN10-04 IP=10.0.0.25 Status=Success
+2026-02-10 08:25:22 EventID=4672 User=svc_backup Privileges=SeBackupPrivilege
+2026-02-10 08:30:31 EventID=4624 LogonType=3 User=jsmith Workstation=SERVER01 IP=10.0.0.15 Status=Success
+2026-02-10 08:31:12 EventID=4624 LogonType=3 User=jsmith Workstation=SERVER02 IP=10.0.0.15 Status=Success
+2026-02-10 08:32:19 EventID=4625 LogonType=3 User=jsmith Workstation=SERVER03 IP=10.0.0.15 Status=Failure
+2026-02-10 08:33:40 EventID=4624 LogonType=3 User=jsmith Workstation=SERVER03 IP=10.0.0.15 Status=Success
+2026-02-10 08:40:01 EventID=4624 LogonType=3 User=unknown Workstation=DC01 IP=185.199.110.1 Status=Success
+2026-02-10 08:41:22 EventID=4625 LogonType=3 User=unknown Workstation=DC01 IP=185.199.110.1 Status=Failure
+2026-02-10 08:42:33 EventID=4625 LogonType=3 User=unknown Workstation=DC01 IP=185.199.110.1 Status=Failure
+2026-02-10 08:43:44 EventID=4624 LogonType=10 User=administrator Workstation=WIN10-05 IP=10.0.0.35 Status=Success
+2026-02-10 08:44:55 EventID=4672 User=administrator Privileges=SeTcbPrivilege
+2026-02-10 08:45:10 EventID=7045 ServiceName=backupagent BinaryPath=C:\Program Files\backup.exe InstalledBy=svc_backup
+2026-02-10 08:50:01 EventID=4720 TargetUser=helpdesk1 Creator=administrator
+2026-02-10 08:51:19 EventID=4624 LogonType=2 User=helpdesk1 Workstation=WIN10-06 IP=10.0.0.45 Status=Success
+2026-02-10 08:55:22 EventID=4625 LogonType=3 User=admin Workstation=WIN10-07 IP=198.51.100.22 Status=Failure
+2026-02-10 08:56:33 EventID=4625 LogonType=3 User=admin Workstation=WIN10-07 IP=198.51.100.22 Status=Failure
+2026-02-10 08:57:44 EventID=4624 LogonType=3 User=admin Workstation=WIN10-07 IP=198.51.100.22 Status=Success

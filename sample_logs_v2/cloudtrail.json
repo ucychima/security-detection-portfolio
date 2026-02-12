@@ -1,0 +1,386 @@
+{
+  "Records": [
+
+    {
+      "eventTime": "2026-02-10T08:00:01Z",
+      "eventSource": "signin.amazonaws.com",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "10.0.0.15",
+      "userIdentity": { "type": "IAMUser", "userName": "jsmith" },
+      "responseElements": { "ConsoleLogin": "Success" }
+    },
+
+    {
+      "eventTime": "2026-02-10T08:02:01Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "CreateUser",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "admin" },
+      "requestParameters": { "userName": "tempuser" }
+    },
+
+    {
+      "eventTime": "2026-02-10T08:03:01Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "PutUserPolicy",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "admin" },
+      "requestParameters": {
+        "userName": "tempuser",
+        "policyName": "InlineAdmin",
+        "policyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            { "Effect": "Allow", "Action": "*", "Resource": "*" }
+          ]
+        }
+      }
+    },
+
+    {
+      "eventTime": "2026-02-10T08:05:01Z",
+      "eventSource": "signin.amazonaws.com",
+      "eventName": "ConsoleLogin",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "185.199.110.50",
+      "userIdentity": { "type": "Root" },
+      "responseElements": { "ConsoleLogin": "Success" }
+    },
+
+    {
+      "eventTime": "2026-02-10T08:06:01Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "CreateAccessKey",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "Root" }
+    },
+
+    {
+      "eventTime": "2026-02-10T08:07:01Z",
+      "eventSource": "cloudtrail.amazonaws.com",
+      "eventName": "StopLogging",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "tempuser" }
+    },
+
+    {
+      "eventTime": "2026-02-10T08:08:01Z",
+      "eventSource": "cloudtrail.amazonaws.com",
+      "eventName": "DeleteTrail",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "tempuser" }
+    },
+
+    {
+      "eventTime": "2026-02-10T08:09:01Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "PutBucketAcl",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "tempuser" },
+      "requestParameters": { "bucketName": "finance-data", "acl": "public-read" }
+    },
+
+    {
+      "eventTime": "2026-02-10T08:10:01Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "GetObject",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "tempuser" },
+      "requestParameters": { "bucketName": "finance-data", "key": "payroll.xlsx" }
+    },
+
+    {
+      "eventTime": "2026-02-10T08:11:01Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "ListUsers",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "tempuser" }
+    },
+
+    {
+      "eventTime": "2026-02-10T08:12:01Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "GetCallerIdentity",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "tempuser" }
+    },
+
+    {
+      "eventTime": "2026-02-10T08:13:01Z",
+      "eventSource": "ec2.amazonaws.com",
+      "eventName": "DescribeInstances",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "tempuser" }
+    },
+
+    {
+      "eventTime": "2026-02-10T08:14:01Z",
+      "eventSource": "ec2.amazonaws.com",
+      "eventName": "AuthorizeSecurityGroupIngress",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "tempuser" },
+      "requestParameters": {
+        "groupId": "sg-123abc",
+        "ipProtocol": "tcp",
+        "fromPort": 22,
+        "toPort": 22,
+        "cidrIp": "0.0.0.0/0"
+      }
+    },
+
+    {
+      "eventTime": "2026-02-10T08:15:01Z",
+      "eventSource": "ec2.amazonaws.com",
+      "eventName": "CreateSnapshot",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "tempuser" }
+    },
+
+    {
+      "eventTime": "2026-02-10T08:16:01Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "CreateUser",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "tempuser" },
+      "requestParameters": { "userName": "backup-admin" }
+    },
+
+    {
+      "eventTime": "2026-02-10T08:17:01Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "AttachUserPolicy",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "tempuser" },
+      "requestParameters": {
+        "userName": "backup-admin",
+        "policyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+      }
+    },
+
+    {
+      "eventTime": "2026-02-10T08:18:01Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "CreateAccessKey",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" }
+    },
+
+    {
+      "eventTime": "2026-02-10T08:19:01Z",
+      "eventSource": "ec2.amazonaws.com",
+      "eventName": "RunInstances",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" }
+    },
+
+    {
+      "eventTime": "2026-02-10T08:20:01Z",
+      "eventSource": "ec2.amazonaws.com",
+      "eventName": "ModifyInstanceAttribute",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" }
+    },
+
+    {
+      "eventTime": "2026-02-10T08:21:01Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "ListBuckets",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" }
+    },
+
+    {
+      "eventTime": "2026-02-10T08:22:01Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "GetObject",
+      "awsRegion": "us-west-2",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" },
+      "requestParameters": { "bucketName": "hr-records", "key": "employees.csv" }
+    },
+    {
+      "eventTime": "2026-02-10T08:23:01Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "ListRoles",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" }
+    },
+    {
+      "eventTime": "2026-02-10T08:24:01Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "ListPolicies",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" }
+    },
+    {
+      "eventTime": "2026-02-10T08:25:01Z",
+      "eventSource": "ec2.amazonaws.com",
+      "eventName": "DescribeSecurityGroups",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" }
+    },
+    {
+      "eventTime": "2026-02-10T08:26:01Z",
+      "eventSource": "ec2.amazonaws.com",
+      "eventName": "CreateSecurityGroup",
+      "awsRegion": "us-west-2",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" }
+    },
+    {
+      "eventTime": "2026-02-10T08:27:01Z",
+      "eventSource": "ec2.amazonaws.com",
+      "eventName": "AuthorizeSecurityGroupIngress",
+      "awsRegion": "us-west-2",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" },
+      "requestParameters": {
+        "groupId": "sg-789xyz",
+        "ipProtocol": "tcp",
+        "fromPort": 3389,
+        "toPort": 3389,
+        "cidrIp": "0.0.0.0/0"
+      }
+    },
+    {
+      "eventTime": "2026-02-10T08:28:01Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "CreateRole",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" }
+    },
+    {
+      "eventTime": "2026-02-10T08:29:01Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "AttachRolePolicy",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" },
+      "requestParameters": {
+        "roleName": "EC2AdminRole",
+        "policyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+      }
+    },
+    {
+      "eventTime": "2026-02-10T08:30:01Z",
+      "eventSource": "ec2.amazonaws.com",
+      "eventName": "AssociateIamInstanceProfile",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" }
+    },
+    {
+      "eventTime": "2026-02-10T08:31:01Z",
+      "eventSource": "sts.amazonaws.com",
+      "eventName": "AssumeRole",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" }
+    },
+    {
+      "eventTime": "2026-02-10T08:32:01Z",
+      "eventSource": "ec2.amazonaws.com",
+      "eventName": "DescribeSnapshots",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "AssumedRole", "sessionContext": { "sessionIssuer": { "userName": "EC2AdminRole" } } }
+    },
+    {
+      "eventTime": "2026-02-10T08:33:01Z",
+      "eventSource": "ec2.amazonaws.com",
+      "eventName": "CopySnapshot",
+      "awsRegion": "us-west-2",
+      "userIdentity": { "type": "AssumedRole", "sessionContext": { "sessionIssuer": { "userName": "EC2AdminRole" } } }
+    },
+    {
+      "eventTime": "2026-02-10T08:34:01Z",
+      "eventSource": "ec2.amazonaws.com",
+      "eventName": "ModifySnapshotAttribute",
+      "awsRegion": "us-west-2",
+      "userIdentity": { "type": "AssumedRole", "sessionContext": { "sessionIssuer": { "userName": "EC2AdminRole" } } }
+    },
+    {
+      "eventTime": "2026-02-10T08:35:01Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "CreateBucket",
+      "awsRegion": "us-west-2",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" },
+      "requestParameters": { "bucketName": "exfiltration-bucket-2026" }
+    },
+    {
+      "eventTime": "2026-02-10T08:36:01Z",
+      "eventSource": "s3.amazonaws.com",
+      "eventName": "PutObject",
+      "awsRegion": "us-west-2",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" },
+      "requestParameters": { "bucketName": "exfiltration-bucket-2026", "key": "snapshot-copy.vmdk" }
+    },
+    {
+      "eventTime": "2026-02-10T08:37:01Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "DeleteUser",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "admin" },
+      "requestParameters": { "userName": "jsmith" }
+    },
+    {
+      "eventTime": "2026-02-10T08:38:01Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "UpdateAccountPasswordPolicy",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" }
+    },
+    {
+      "eventTime": "2026-02-10T08:39:01Z",
+      "eventSource": "organizations.amazonaws.com",
+      "eventName": "DescribeOrganization",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" }
+    },
+    {
+      "eventTime": "2026-02-10T08:40:01Z",
+      "eventSource": "kms.amazonaws.com",
+      "eventName": "ListKeys",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" }
+    },
+    {
+      "eventTime": "2026-02-10T08:41:01Z",
+      "eventSource": "kms.amazonaws.com",
+      "eventName": "Decrypt",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" }
+    },
+    {
+      "eventTime": "2026-02-10T08:42:01Z",
+      "eventSource": "lambda.amazonaws.com",
+      "eventName": "ListFunctions",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" }
+    },
+    {
+      "eventTime": "2026-02-10T08:43:01Z",
+      "eventSource": "lambda.amazonaws.com",
+      "eventName": "UpdateFunctionCode",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" }
+    },
+    {
+      "eventTime": "2026-02-10T08:44:01Z",
+      "eventSource": "ec2.amazonaws.com",
+      "eventName": "TerminateInstances",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" }
+    },
+    {
+      "eventTime": "2026-02-10T08:45:01Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "DeleteAccessKey",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" }
+    },
+    {
+      "eventTime": "2026-02-10T08:46:01Z",
+      "eventSource": "iam.amazonaws.com",
+      "eventName": "DeleteUser",
+      "awsRegion": "us-east-1",
+      "userIdentity": { "type": "IAMUser", "userName": "backup-admin" },
+      "requestParameters": { "userName": "tempuser" }
+    }
+
+  ]
+}
