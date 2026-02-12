@@ -1,0 +1,169 @@
+================================================================================
+LOG PARSING AND NORMALIZATION - DETECTION ENGINEERING INTERVIEW PREP
+================================================================================
+Beginner Level Tasks for Learning Log Parsing & Normalization
+
+================================================================================
+1. CloudTrail (JSON) - Parsing Tasks
+================================================================================
+
+Task 1: Extract Events by User
+- Parse the JSON and return all events for user "alice"
+- Hint: Use 'import json'. Read file with 'open()'. Use json.loads() per line. Filter with: [json.loads(line) for line in file if json.loads(line)['user'] == 'alice']
+
+Task 2: Detect IP Changes
+- Find all users who logged in from multiple different IP addresses
+- Hint: Use 'from collections import defaultdict'. Create defaultdict(set). Loop through events and add src_ip to each user's set: users[user].add(src_ip). Filter users with len(set) > 1.
+
+Task 3: Extract High-Risk Events
+- Identify events with names like "CreateUser", "AssumeRole", "AttachRolePolicy", "UpdateAssumeRolePolicy", "CreateAccessKey"
+- Hint: Define SENSITIVE_EVENTS = {'CreateUser', 'AssumeRole', ...}. Use filter(): [e for e in events if e['eventName'] in SENSITIVE_EVENTS]
+
+Task 4: Timeline Analysis
+- Extract all events for a specific date (e.g., "2024-01-04") and create a chronological list with timestamp, user, and action
+- Hint: Use 'from datetime import datetime'. Parse with datetime.fromisoformat(). Filter by .date() == target_date. Sort with sorted(events, key=lambda e: e['eventTime'])
+
+Task 5: Anomaly Detection - Impossible Travel
+- Find users who logged in from different IPs with only minutes between timestamps
+- Hint: Use 'from datetime import datetime, timedelta'. Group by user, sort events by time. Use zip() on consecutive events to compare: (event1['eventTime'], event1['src_ip']) vs (event2['eventTime'], event2['src_ip']). Check if timedelta < 60 seconds AND ips differ.
+
+================================================================================
+2. Firewall (CSV) - Parsing Tasks
+================================================================================
+
+Task 1: Parse and Count Actions
+- Read the CSV and count how many ALLOW vs DENY actions occurred
+- Hint: Use 'import csv' with csv.DictReader(). Or use 'import pandas as pd' with pd.read_csv(). Count with collections.Counter: Counter([row['action'] for row in reader])
+
+Task 2: Find Blocked IPs
+- Extract all source IPs that experienced DENY actions
+- Hint: Use set() comprehension: blocked_ips = {row['src_ip'] for row in reader if row['action'] == 'DENY'}. Or pandas: df[df['action']=='DENY']['src_ip'].unique()
+
+Task 3: Identify Noisy Destinations
+- Find destination IPs that received multiple DENY attempts from different sources
+- Hint: Use 'from collections import defaultdict'. Create defaultdict(set): dest_sources[row['dest_ip']].add(row['src_ip']). Filter: {k:v for k,v in dest_sources.items() if len(v) > 1}
+
+Task 4: Extract Internal Communications
+- Find all traffic between 10.0.0.0/8 networks (internal IPs)
+- Hint: Use str.startswith(): [row for row in reader if row['src_ip'].startswith('10.') and row['dest_ip'].startswith('10.')]. Or use 'from ipaddress import ip_address' with ip_address().is_private
+
+Task 5: Suspicious Pattern Detection
+- Find any source IP that appears in 3+ consecutive DENY actions to the same destination
+- Hint: Use 'from itertools import groupby'. Sort rows by timestamp. Use groupby(rows, key=lambda r: (r['src_ip'], r['dest_ip'])). Count consecutive DENY with sum(1 for _ in group) >= 3
+
+================================================================================
+3. Syslog (Unstructured Text) - Parsing Tasks
+================================================================================
+
+Task 1: Extract Failed Login Attempts
+- Parse the logs and count failed authentication attempts
+- Hint: Use with open(): sum(1 for line in file if 'Failed password' in line). Or use str.count(): content.count('Failed password')
+
+Task 2: Identify Brute Force Attempts
+- Find source IPs with 3+ failed login attempts within a short timeframe
+- Hint: Use 'import re'. Extract IPs with re.search(r'from (\d+\.\d+\.\d+\.\d+)', line). Use 'from collections import Counter': Counter([ips]). Filter: {ip: count for ip, count in Counter(ips).items() if count >= 3}
+
+Task 3: Extract User Account Details
+- Pull out the usernames from both successful and failed login attempts
+- Hint: Use 'import re'. Test patterns: re.search(r'(?:for|user) (\w+)', line). Extract with match.group(1). Build list of usernames.
+
+Task 4: Extract Sudo Commands
+- Find all sudo commands executed and who ran them
+- Hint: Use 'import re'. Pattern: re.search(r'sudo: (\w+).*COMMAND=(.+)', line). Use defaultdict(list) to map users to commands: command_log[user].append(command)
+
+Task 5: Timeline of Authentication Events
+- Create a chronological list of ALL authentication events with timestamp, result, user, and source IP
+- Hint: Use 'from datetime import datetime'. Parse timestamp with datetime.strptime(timestamp, '%b %d %H:%M:%S'). Create dict/namedtuple for each event. Sort with sorted(events, key=lambda e: e['timestamp'])
+
+================================================================================
+4. VPC Flow (JSON) - Parsing Tasks
+================================================================================
+
+Task 1: Calculate Total Data Transfer
+- Sum up all bytes_out to get total data transferred
+- Hint: Use 'import json'. Calculate: sum(int(json.loads(line)['bytes_out']) for line in file). Or use pandas: df['bytes_out'].sum()
+
+Task 2: Identify Data Exfiltration Suspects
+- Find IPs that transferred >1GB (1,000,000,000 bytes) of data
+- Hint: Use filter(): [event for event in events if int(event['bytes_out']) > 1000000000]. Or pandas: df[df['bytes_out'] > 1000000000]['src_ip'].tolist()
+
+Task 3: Per-IP Data Analysis
+- Calculate total bytes transferred per source IP
+- Hint: Use 'from collections import defaultdict'. Create: totals = defaultdict(int). Loop: totals[event['src_ip']] += int(event['bytes_out']). Or pandas: df.groupby('src_ip')['bytes_out'].sum().sort_values(ascending=False)
+
+Task 4: Time-Window Analysis
+- Find the 5-minute window with highest total data transfer
+- Hint: Use 'import pandas as pd'. Convert timestamps: pd.to_datetime(). Use pd.Timedelta ('5min'). Group and sum with .resample('5min')['bytes_out'].sum()
+
+Task 5: Anomaly Detection - Spike Detection
+- Identify when a source IP's data transfer increases abnormally (5x above average)
+- Hint: Use 'import statistics'. Group by src_ip, calculate: mean_bytes = statistics.mean(bytes_list). Find outliers where bytes > (mean_bytes * 5)
+
+================================================================================
+5. Windows Event (XML) - Parsing Tasks
+================================================================================
+
+Task 1: Extract Event IDs and Counts
+- Parse XML and count how many events have EventID 4104 (PowerShell) vs 4624 (Logins)
+- Hint: Use 'import xml.etree.ElementTree as ET'. Parse: tree = ET.parse(file). Find all: events = root.findall('.//Event'). Extract IDs: [int(e.find('EventID').text) for e in events]. Use Counter() to count.
+
+Task 2: Identify Suspicious PowerShell Activity
+- Find PowerShell commands (EventID 4104) with keywords: "IEX", "DownloadString", "hidden", "enc"
+- Hint: Use 'import xml.etree.ElementTree as ET'. Define SUSPICIOUS = {'IEX', 'DownloadString', 'hidden', 'enc'}. Filter: [e for e in events if e.find('EventID').text == '4104' and any(kw in e.find('Message').text for kw in SUSPICIOUS)]
+
+Task 3: Extract User-Event Mapping
+- Create a table of which users ran which PowerShell commands
+- Hint: Use 'from collections import defaultdict'. Parse XML. Create: user_commands = defaultdict(list). Append messages for EventID 4104. Use pandas.DataFrame() for tabular output.
+
+Task 4: Obfuscation Detection
+- Find PowerShell commands using "-enc", "-nop", "-w hidden" flags
+- Hint: Define OBFUSCATION = {'-enc', '-nop', '-w hidden', '-windowstyle'}. Filter: [e for e in ps_events if any(flag in e.find('Message').text for flag in OBFUSCATION)]
+
+Task 5: Timeline with Event Types
+- Create chronological list with timestamp, user, event type, and summary
+- Hint: Use 'from datetime import datetime'. Create EVENT_MAPPING = {4104: 'PowerShell', 4624: 'Logon'}. Parse, normalize, and sort: sorted(events, key=lambda e: datetime.fromisoformat(e['timestamp']))
+
+================================================================================
+6. NORMALIZATION TASK (Cross-Log Integration)
+================================================================================
+
+Challenge: Correlate Attack Campaign Across Logs
+
+You have indicators that "bob" is suspicious. Using ALL log files:
+
+1. Extract bob's activities:
+   - From CloudTrail: What AWS actions did bob perform?
+   - From Windows Event: What PowerShell commands did bob run?
+   - From Syslog: Did bob log in successfully or fail?
+
+2. Trace the attack chain:
+   - What was bob's first action (earliest timestamp across all logs)?
+   - What was the progression of activities?
+   - Did bob change IP addresses?
+
+3. Normalize to a common format:
+   - Create a unified log entry format with: timestamp | source_system | user | action | src_ip | severity | notes
+   - Merge all bob's activities into this format
+   - Identify which actions are suspicious (e.g., PowerShell encoding + AWS role assumption)
+
+4. Write a detection rule:
+   - Based on the normalized data, write a rule to catch this pattern again (in plain English or pseudocode)
+
+Hints for normalization (Python):
+- Define a common schema: use dict or dataclass. Example: {'timestamp': ..., 'source': ..., 'user': ..., 'action': ..., 'src_ip': ..., 'severity': ..., 'notes': ...}
+- Use 'from datetime import datetime'. Convert all timestamps: datetime.fromisoformat() or datetime.strptime()
+- Handle missing fields with dict.get(field, 'N/A') or None
+- Create action mappings: ACTION_MAP = {'Accepted password': 'login_success', 'Failed password': 'login_failure', 'CreateUser': 'user_creation', ...}
+- Combine logs: use list comprehension to create normalized events from each source
+- Sort final list: sorted(all_events, key=lambda e: datetime.fromisoformat(e['timestamp']))
+- Use pandas.DataFrame() to combine and analyze: pd.concat([df1, df2, df3]).sort_values('timestamp')
+- Filter by user: df[df['user'] == 'bob']
+
+================================================================================
+END OF TASKS
+================================================================================
+Good luck with your detection engineering interview prep!
+Start with Task 1 from each log type to build foundational skills.
+Progress to harder tasks as you gain confidence.
+The normalization task will test your ability to think like a detection engineer!
+================================================================================
